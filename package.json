@@ -1,0 +1,21 @@
+{
+  "name": "spq-netsim",
+  "version": "1.0.0",
+  "description": "Discrete-event simulator for strict priority queuing (audio > video > data) across a chain of network nodes, with ON/OFF traffic sources.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "sim": "node --disable-warning=ExperimentalWarning src/cli.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test",
+    "validate": "node --disable-warning=ExperimentalWarning src/cli.ts validate"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.0"
+  }
+}

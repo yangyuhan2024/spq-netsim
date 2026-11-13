@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - name: Theory validation
+        run: npm run validate
+      - name: Smoke sweep
+        run: npm run sim -- sweep --scenario q1 --from 0.3 --to 0.9 --step 0.3 --duration 20 --out results/q1-ci.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sweep-results
+          path: results/
